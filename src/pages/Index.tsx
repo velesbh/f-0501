@@ -5,6 +5,7 @@ import { ChatMessage } from "@/components/ChatMessage";
 import { ExampleQuestion } from "@/components/ExampleQuestion";
 import { Mic, MicOff, Send } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
@@ -96,8 +97,8 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#0A0A0A]">
-      <div className="flex items-center justify-between p-3 border-b border-[#27272A]">
+    <div className="flex-1 flex flex-col bg-background">
+      <div className="flex items-center justify-between p-3 border-b border-border">
         <div className="flex items-center gap-3">
           <h1 className="text-sm font-medium">Chatbot</h1>
           <Button variant="outline" size="icon" className="w-6 h-6">
@@ -114,10 +115,7 @@ const Index = () => {
           <Button variant="outline" className="h-7 px-3 text-xs">
             Private
           </Button>
-          <Button variant="outline" className="h-7 px-3 text-xs gap-1">
-            <span className="text-xs">▲</span>
-            Deploy with Vercel
-          </Button>
+          <ThemeToggle />
         </div>
       </div>
 
@@ -147,7 +145,7 @@ const Index = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Send a message..."
-            className="bg-[#18181B] border-0 focus-visible:ring-0 text-sm py-6"
+            className="bg-muted border-0 focus-visible:ring-0 text-sm py-6"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
             <Button

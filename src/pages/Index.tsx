@@ -16,19 +16,19 @@ const Index = () => {
   const exampleQuestions = [
     {
       title: "What are the advantages",
-      subtitle: "of using Enzonic AI?",
+      subtitle: "of using Next.js?",
     },
     {
       title: "Write code to",
-      subtitle: "implement a binary search tree",
+      subtitle: "demonstrate dijkstra's algorithm",
     },
     {
       title: "Help me write an essay",
-      subtitle: "about artificial intelligence",
+      subtitle: "about silicon valley",
     },
     {
-      title: "What is the future",
-      subtitle: "of machine learning?",
+      title: "What is the weather",
+      subtitle: "in San Francisco?",
     },
   ];
 
@@ -65,7 +65,8 @@ const Index = () => {
       return;
     }
 
-    recognitionRef.current = new webkitSpeechRecognition();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognition();
     recognitionRef.current.continuous = true;
     recognitionRef.current.interimResults = true;
 
@@ -95,53 +96,72 @@ const Index = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <div className="flex flex-col flex-1 max-w-6xl mx-auto p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-2xl font-bold">Enzonic AI</h1>
-          <Button variant="outline" size="sm">
+    <div className="flex flex-col h-screen bg-[#0A0A0A]">
+      <div className="flex items-center justify-between p-3 border-b border-[#27272A]">
+        <div className="flex items-center gap-3">
+          <h1 className="text-sm font-medium">Chatbot</h1>
+          <Button variant="outline" size="icon" className="w-6 h-6">
+            <span className="text-xs">+</span>
+          </Button>
+          <Button variant="outline" size="icon" className="w-6 h-6">
+            <span className="text-xs">□</span>
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" className="h-7 px-3 text-xs">
+            GPT 4.0 mini
+          </Button>
+          <Button variant="outline" className="h-7 px-3 text-xs">
+            Private
+          </Button>
+          <Button variant="outline" className="h-7 px-3 text-xs gap-1">
+            <span className="text-xs">▲</span>
             Deploy with Vercel
           </Button>
         </div>
+      </div>
 
-        <div className="flex-1 overflow-y-auto mb-4 space-y-4">
-          {messages.length === 0 ? (
-            <div className="grid grid-cols-2 gap-4 p-4">
-              {exampleQuestions.map((q, i) => (
-                <ExampleQuestion
-                  key={i}
-                  title={q.title}
-                  subtitle={q.subtitle}
-                  onClick={(question) => setInput(question)}
-                />
-              ))}
-            </div>
-          ) : (
-            messages.map((msg, i) => (
-              <ChatMessage key={i} message={msg.text} isUser={msg.isUser} />
-            ))
-          )}
-        </div>
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.length === 0 ? (
+          <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto mt-[40vh]">
+            {exampleQuestions.map((q, i) => (
+              <ExampleQuestion
+                key={i}
+                title={q.title}
+                subtitle={q.subtitle}
+                onClick={(question) => setInput(question)}
+              />
+            ))}
+          </div>
+        ) : (
+          messages.map((msg, i) => (
+            <ChatMessage key={i} message={msg.text} isUser={msg.isUser} />
+          ))
+        )}
+      </div>
 
-        <div className="flex gap-2">
+      <div className="p-4 max-w-2xl mx-auto w-full">
+        <div className="relative">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Send a message..."
-            className="flex-1"
+            className="bg-[#18181B] border-0 focus-visible:ring-0 text-sm py-6"
           />
-          <Button
-            size="icon"
-            variant="outline"
-            onClick={toggleListening}
-            className={isListening ? "bg-primary text-primary-foreground" : ""}
-          >
-            {isListening ? <MicOff /> : <Mic />}
-          </Button>
-          <Button size="icon" onClick={handleSend}>
-            <Send />
-          </Button>
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={toggleListening}
+              className={`h-8 w-8 ${isListening ? "text-primary" : ""}`}
+            >
+              {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+            </Button>
+            <Button size="icon" variant="ghost" onClick={handleSend} className="h-8 w-8">
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

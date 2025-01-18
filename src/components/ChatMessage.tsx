@@ -15,7 +15,7 @@ export function ChatMessage({ message, isUser = false }: ChatMessageProps) {
     >
       <div className={cn(
         "max-w-[80%] rounded-lg px-4 py-2 text-sm",
-        isUser ? "bg-primary text-primary-foreground" : "bg-muted"
+        isUser ? "bg-[#18181B]" : "bg-[#18181B]"
       )}>
         {message}
       </div>

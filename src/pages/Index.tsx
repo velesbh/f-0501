@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChatMessage } from "@/components/ChatMessage";
 import { ExampleQuestion } from "@/components/ExampleQuestion";
-import { Mic, MicOff, Send } from "lucide-react";
+import { Mic, MicOff, Send, Plus, Square } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -37,7 +37,7 @@ const Index = () => {
     if (!input.trim()) return;
     
     setMessages(prev => [...prev, { text: input, isUser: true }]);
-    // Simulate AI response - in a real app, you'd call your API here
+    // Simulate AI response
     setTimeout(() => {
       setMessages(prev => [...prev, { 
         text: "Thanks for your message! This is a demo response from Enzonic AI.", 
@@ -99,20 +99,20 @@ const Index = () => {
   return (
     <div className="flex-1 flex flex-col bg-background">
       <div className="flex items-center justify-between p-3 border-b border-border">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <h1 className="text-sm font-medium">Chatbot</h1>
-          <Button variant="outline" size="icon" className="w-6 h-6">
-            <span className="text-xs">+</span>
+          <Button variant="ghost" size="icon" className="w-6 h-6">
+            <Plus className="h-3 w-3" />
           </Button>
-          <Button variant="outline" size="icon" className="w-6 h-6">
-            <span className="text-xs">□</span>
+          <Button variant="ghost" size="icon" className="w-6 h-6">
+            <Square className="h-3 w-3" />
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="h-7 px-3 text-xs">
+          <Button variant="ghost" className="h-7 px-3 text-xs">
             GPT 4.0 mini
           </Button>
-          <Button variant="outline" className="h-7 px-3 text-xs">
+          <Button variant="ghost" className="h-7 px-3 text-xs">
             Private
           </Button>
           <ThemeToggle />
@@ -145,7 +145,7 @@ const Index = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Send a message..."
-            className="bg-muted border-0 focus-visible:ring-0 text-sm py-6"
+            className="bg-[#18181B] border-0 focus-visible:ring-0 text-sm py-6"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
             <Button

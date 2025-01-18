@@ -14,6 +14,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const exampleQuestions = [
+  {
+    title: "What is Enzonic Flash?",
+    subtitle: "Learn about our latest AI model",
+  },
+  {
+    title: "How can I use Enzonic Flash?",
+    subtitle: "Get started with basic instructions",
+  },
+  {
+    title: "What are the key features?",
+    subtitle: "Discover the capabilities",
+  },
+  {
+    title: "Tell me about pricing",
+    subtitle: "Learn about our pricing plans",
+  },
+];
+
 const Index = () => {
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
   const [input, setInput] = useState("");
